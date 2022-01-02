@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: angular-cat-food-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: angular-cat-food-app
+  template:
+    metadata:
+      labels:
+        app: angular-cat-food-app
+    spec:
+      containers:
+        - name: angular-cat-food-app
+          image: banzo276/angular-cat-food-app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: angular-cat-food-app
+spec:
+  selector:
+    app: angular-cat-food-app
+  ports:
+    - name: angular-cat-food-app
+      protocol: TCP
+      port: 80
+      targetPort: 80

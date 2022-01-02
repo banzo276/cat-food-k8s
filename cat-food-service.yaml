@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cat-food-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cat-food-service
+  template:
+    metadata:
+      labels:
+        app: cat-food-service
+    spec:
+      containers:
+        - name: cat-food-service
+          image: banzo276/cat-food-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cat-food-service
+spec:
+  selector:
+    app: cat-food-service
+  ports:
+    - name: cat-food-service
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
